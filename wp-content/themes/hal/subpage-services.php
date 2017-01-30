@@ -67,7 +67,7 @@ $subpages = get_pages('child_of='.$page->ID.'&sort_column=ID&sort_order=asc'); $
         <div class="col-sm-4 card-intro">
         <h2><?php echo get_sub_field('title'); ?></h2>
         <div class="intro">
-          <?php echo get_sub_field('intro'); ?>
+          <p><?php echo get_sub_field('intro'); ?></p>
 
           <?php $btn = get_sub_field('button'); if($btn[0]['label']) { ?>
           <a href="<?php echo $btn[0]['url']; ?>" class="btn btn-act"><?php echo $btn[0]['label']; ?></a>

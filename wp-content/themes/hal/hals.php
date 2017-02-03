@@ -96,8 +96,8 @@ get_header(); ?>
           		<?php endwhile; ?>
           	<?php endif; ?>
           </div>
-    	    <?php endwhile; ?>
     		</div>
+  	    <?php endwhile; ?>
       </div>
   	<?php endif; ?>
   </div>
@@ -119,18 +119,18 @@ get_header(); ?>
     <?php if( have_rows('faqs') ): ?>
 	    <?php while ( have_rows('faqs') ) : the_row(); ?>
         <li data-accordion="">
-			<?php if(get_sub_field('question')): ?>
-				<a href="#faq-items" data-control=""><?php the_sub_field('question'); ?></a>
-			<?php endif; ?>
+    			<?php if(get_sub_field('question')): ?>
+    				<a href="#faq-items" data-control=""><?php the_sub_field('question'); ?></a>
+    			<?php endif; ?>
 	        <?php if(get_sub_field('answer')): ?>
-	            <div data-content=""><?php the_sub_field('answer'); ?></div>
+	            <div data-content=""><p><?php the_sub_field('answer'); ?></p></div>
 	        <?php endif; ?>
         </li>
 	    <?php endwhile; ?>
 	   <?php endif; ?>
 	   
     </ul>
-
+    
     <a href="#locations" class="btn btn-act dark">Still have questions? Contact Us.</a>
 
   </div>
@@ -150,33 +150,33 @@ get_header(); ?>
   <div class="clearfix"></div>
 
   <div class="about-stores clearfix">
-<!--
-    <?php //$stores = get_field('locations', $page->ID); $st = 1; $stt = 1; foreach($stores as $store) { ?>
 
-    <div class="col-sm-4 about-store" style="background:url(<?php //echo $store['image']; ?>) top center no-repeat; background-size:cover;">
+    <?php $stores = get_field('locations', $page->ID); $st = 1; $stt = 1; foreach($stores as $store) { ?>
+
+    <div class="col-sm-4 about-store" style="background:url(<?php echo $store['location-image']; ?>) top center no-repeat; background-size:cover;">
       <div class="about-store-title">
         <span class="fa fa-map-marker"></span>
-        <a href="#store-<?php //echo $st++; ?>" data-toggle="modal"><?php //echo apply_filters('the_content()', $store['title'] ); ?></a>
+        <h4><a href="#store-<?php echo $stt++; ?>" data-toggle="modal"><?php echo apply_filters('the_content()', $store['location-title'] ); ?></a></h4>
       </div>
     </div>
 
-    <div class="modal fade" id="store-<?php //echo $stt++; ?>" tabindex="-1" role="dialog">
+    <div class="modal fade" id="store-<?php echo $st++; ?>" tabindex="-1" role="dialog">
       <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4><?php //echo $store['modal_title']; ?></h4>
+            <h4><?php echo $store['location-title']; ?></h4>
           </div>
           
           <div class="clearfix about-store-modal">
-            <?php //echo apply_filters('the_content()', $store['store_info']); ?>
+            <?php echo apply_filters('the_content()', $store['store-info']); ?>
           </div>
         </div>
       </div>
     </div>
 
-    <?php //} ?>
--->
+    <?php } ?>
+
   </div>
 
   <div class="col-sm-6 col-sm-offset-3 clearfix about-online">
@@ -191,9 +191,11 @@ get_header(); ?>
   <div class="card-nav">
     <nav class="emblem brown">
       <ul class="nav nav-pills">
-      <?php $sites = get_field('websites', 'option'); foreach($sites as $site){ ?>
-        <li><a href="<?php echo $site['site_url']; ?>"><?php echo $site['site_name']; ?></a></li>
-      <?php } ?>
+        <?php if( have_rows('sites') ): ?>
+    	    <?php while ( have_rows('sites') ) : the_row(); ?>
+            <li><a href="<?php the_sub_field('site_url'); ?>"><?php the_sub_field('site_name'); ?></a></li>
+    	    <?php endwhile; ?>
+    	   <?php endif; ?>
       </ul>
     </nav>
   </div>
